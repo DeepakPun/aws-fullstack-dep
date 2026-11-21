@@ -1,0 +1,35 @@
+# Dependencies (applies to both ui/ and api/)
+node_modules/
+.pnp
+.pnp.js
+
+# Production builds (React/Vite output)
+dist/
+build/
+
+# Environment variables & Secrets (CRITICAL for MongoDB URIs & AWS keys)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor & OS files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
