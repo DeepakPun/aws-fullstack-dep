@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Express api for aws learning",
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "license": "MIT",
+  "author": "Deepak Pun",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "dev": "node --watch index",
+    "start": "node index"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "mongoose": "^9.12.3"
+  }
+}
