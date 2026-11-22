@@ -2,6 +2,11 @@
 node_modules/
 .pnp
 .pnp.js
+randomnotes.txt
+
+api.zip
+dist/
+.env.production
 
 # Production builds (React/Vite output)
 dist/

@@ -1,17 +1,22 @@
-import dotenv from 'dotenv'
-dotenv.config()
-import express from "express"
-import cors from "cors"
+import dotenv from 'dotenv';
+dotenv.config();
+import express from 'express';
+import cors from 'cors';
+import serverless from 'serverless-http';
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
+
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(',')
+    : ['http://localhost', 'http://localhost:5173'];
 
 const corsOptions = {
-    allowedOrigins: ['http://localhost', 'http://localhost:5173']
-}
+    origin: allowedOrigins,
+};
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
     res.status(200).json({
@@ -22,12 +27,16 @@ app.get('/', (req, res) => {
         database: {
             connected: false,
             mode: 'mock',
-            configuredUri: process.env.MONGO_URI ? 'loaded-from-env' : 'missing'
+            configuredUri: process.env.MONGO_URI ? 'loaded-from-env' : 'missing',
         },
         uptimeSeconds: Math.floor(process.uptime()),
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
     });
-})
+});
 
-const PORT = process.env.PORT || 3001
-app.listen(PORT, () => console.log(`API is up and running on port ${PORT}`))
+if (!process.env.LAMBDA_TASK_ROOT) {
+    const PORT = process.env.PORT || 3001;
+    app.listen(PORT, () => console.log(`API is up and running on port ${PORT}`));
+}
+
+export const handler = serverless(app);
